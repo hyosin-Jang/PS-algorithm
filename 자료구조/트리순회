@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//ÀÌÁøÆ®¸® µ¥ÀÌÅÍ
+//ì´ì§„íŠ¸ë¦¬ ë°ì´í„°
 typedef char BTData;
 
 typedef struct _bTreeNode
@@ -13,7 +13,7 @@ typedef struct _bTreeNode
 }BTreeNode;
 
 
-//BTreeNode »ý¼º
+//BTreeNode ìƒì„±
 BTreeNode* MakeBTreeNode(BTData data) {
 	BTreeNode* nd = (BTreeNode*)malloc(sizeof(BTreeNode));
 	nd->data = data;
@@ -28,7 +28,7 @@ BTreeNode* SearchTree(BTreeNode* bt, BTData data) {
 		if (bt->data == data)
 			return bt;
 		else {
-			//Àç±ÍÀû È£Ãâ
+			//ìž¬ê·€ì  í˜¸ì¶œ
 			BTreeNode* btt = SearchTree(bt->left, data);
 			if (btt != NULL) {
 				return btt;
