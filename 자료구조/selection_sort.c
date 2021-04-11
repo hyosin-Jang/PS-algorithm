@@ -5,7 +5,7 @@
 //
 //#define MAX_SIZE 15
 //
-//// ¸ÅÅ©·ÎÇÔ¼ö
+//// ë§¤í¬ë¡œí•¨ìˆ˜
 //#define SWAP(x,y,t)((t)=(x),(x)=(y),(y)=(t))
 //
 //void selection_sort(int list[], int n) {
@@ -23,13 +23,13 @@
 //
 //void main() {
 //	int list[MAX_SIZE];
-//	srand(time(NULL)); // ½Ãµå¼³Á¤ÇØ¼­ °íÁ¤µÈ °ª ¾È³ª¿À°Ô ÇÔ
+//	srand(time(NULL)); // ì‹œë“œì„¤ì •í•´ì„œ ê³ ì •ëœ ê°’ ì•ˆë‚˜ì˜¤ê²Œ í•¨
 //
 //	for (int i = 0; i < MAX_SIZE; i++) {
-//		list[i] = rand() % 100; //0~99±îÁö ³­¼ö ¹ß»ı
+//		list[i] = rand() % 100; //0~99ê¹Œì§€ ë‚œìˆ˜ ë°œìƒ
 //		for (int j = 0; j < i; j++)
 //			if (list[j] == list[i])
-//				i--; // Áßº¹Á¦°Å, ´Ù½Ã ³­¼ö°ª ¹Ş±â
+//				i--; // ì¤‘ë³µì œê±°, ë‹¤ì‹œ ë‚œìˆ˜ê°’ ë°›ê¸°
 //	}
 //
 //	for (int i = 0; i < MAX_SIZE; i++)
@@ -40,7 +40,7 @@
 //
 //	for (int i = 0; i < MAX_SIZE; i++) {
 //		printf("%d ",list[i]);
-//		Sleep(500); // 0.5ÃÊ µô·¹ÀÌ
+//		Sleep(500); // 0.5ì´ˆ ë”œë ˆì´
 //	}
 //	printf("\n\n");
 //}
