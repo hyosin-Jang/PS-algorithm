@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// 원형큐로도 풀어보기
+
 int main()
 
 {
@@ -35,3 +37,5 @@ printf("%d, ", arr2[i]);
 printf("%d>", arr2[n - 1]);
 }
 }
+
+
