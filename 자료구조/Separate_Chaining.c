@@ -20,23 +20,23 @@ void insertItem(HashType* HT, int key) {
 	int v = h(key);
 	HashType* node = (HashType*)malloc(sizeof(HashType));
 	node->key = key;
-	// addFirst¿¬»ê
-	node->next = HT[v].next; // Áö±Ý ¸¸µç nodeÀÇ next¿¡ ÇöÀç HT[v]ÀÇ first ¿¬°áÇØÁÜ
+	// addFirstì—°ì‚°
+	node->next = HT[v].next; // ì§€ê¸ˆ ë§Œë“  nodeì˜ nextì— í˜„ìž¬ HT[v]ì˜ first ì—°ê²°í•´ì¤Œ
 	HT[v].next = node;
 }
 int removeElement(HashType* HT, int key) {
 	int v = h(key);
-	int count = 0; // °°Àº Å°°¡ ¸î°³ »èÁ¦µÆ´ÂÁö
-	// »èÁ¦ÇÑ ³ëµå ±â¾ï
-	// HashTypeÀÇ ÁÖ¼Ò¸¦ ±â¾ïÇÏ´Â Æ÷ÀÎÅÍ º¯¼ö p
-	// ¿¡´Ù, HT[v]´Â HashTypeÀÓ. HashTypeÀÇ ÁÖ¼Ò ÀúÀå!
+	int count = 0; // ê°™ì€ í‚¤ê°€ ëª‡ê°œ ì‚­ì œëëŠ”ì§€
+	// ì‚­ì œí•œ ë…¸ë“œ ê¸°ì–µ
+	// HashTypeì˜ ì£¼ì†Œë¥¼ ê¸°ì–µí•˜ëŠ” í¬ì¸í„° ë³€ìˆ˜ p
+	// ì—ë‹¤, HT[v]ëŠ” HashTypeìž„. HashTypeì˜ ì£¼ì†Œ ì €ìž¥!
 	HashType* p = &HT[v];
 	HashType* q;
 
 	while (p->next) {
 		if (p->next->key == key) {
 			count++;
-			//q´Â »èÁ¦µÉ ³ëµå
+			//qëŠ” ì‚­ì œë  ë…¸ë“œ
 			q = p->next;
 			p->next = q->next;
 			free(q);
@@ -56,7 +56,7 @@ int findElement(HashType* HT, int key) {
 	}
 	return count; 
 }
-
+ 
 void printHash(HashType* HT) {
 	HashType* p;
 	for (int i = 0; i < M; i++) {
@@ -82,11 +82,11 @@ int main() {
 	printHash(HT);
 
 
-	printf("\n »èÁ¦ÇÒ Å° ÀÔ·Â: ");
+	printf("\n ì‚­ì œí•  í‚¤ ìž…ë ¥: ");
 	int key;
 	scanf("%d",&key);
-	printf("\nÅ° °ª %d°¡ %d°³ »èÁ¦µÇ¾ú½À´Ï´Ù.\n\n", key, removeElement(HT, key));
-	printHash(HT); // ¹è¿­Àº ÁÖ¼Ò Àü´Þ
+	printf("\ní‚¤ ê°’ %dê°€ %dê°œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n\n", key, removeElement(HT, key));
+	printHash(HT); // ë°°ì—´ì€ ì£¼ì†Œ ì „ë‹¬
 
 	return 0;
 }
