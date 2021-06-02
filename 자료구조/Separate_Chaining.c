@@ -1,92 +1,92 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#define M 13
-
-typedef struct HashNode {
-	int key;
-	struct HashNode* next;
-}HashType;
-
-void init(HashType* HT) {
-	for (int i = 0; i < M; i++) {
-		HT[i].key = 0;
-		HT[i].next = NULL;
-	}
-}
-
-void insertItem(HashType* HT, int key) {
-	int v = h(key);
-	HashType* node = (HashType*)malloc(sizeof(HashType));
-	node->key = key;
-	// addFirstì—°ì‚°
-	node->next = HT[v].next; // ì§€ê¸ˆ ë§Œë“  nodeì˜ nextì— í˜„ìž¬ HT[v]ì˜ first ì—°ê²°í•´ì¤Œ
-	HT[v].next = node;
-}
-int removeElement(HashType* HT, int key) {
-	int v = h(key);
-	int count = 0; // ê°™ì€ í‚¤ê°€ ëª‡ê°œ ì‚­ì œëëŠ”ì§€
-	// ì‚­ì œí•œ ë…¸ë“œ ê¸°ì–µ
-	// HashTypeì˜ ì£¼ì†Œë¥¼ ê¸°ì–µí•˜ëŠ” í¬ì¸í„° ë³€ìˆ˜ p
-	// ì—ë‹¤, HT[v]ëŠ” HashTypeìž„. HashTypeì˜ ì£¼ì†Œ ì €ìž¥!
-	HashType* p = &HT[v];
-	HashType* q;
-
-	while (p->next) {
-		if (p->next->key == key) {
-			count++;
-			//qëŠ” ì‚­ì œë  ë…¸ë“œ
-			q = p->next;
-			p->next = q->next;
-			free(q);
-		}
-		else
-			p = p->next;
-	}
-	return count;
-}
-int findElement(HashType* HT, int key) {
-	int v = h(key);
-	int count;
-	HashType* p;
-	for (p = HT[v].next; p != NULL; p = p->next) {
-		if (p->key == key)
-			count++;
-	}
-	return count; 
-}
- 
-void printHash(HashType* HT) {
-	HashType* p;
-	for (int i = 0; i < M; i++) {
-		printf("HT[%02d] : ", i);
-		for (p = HT[i].next; p != NULL; p = p->next)
-			printf("(%d) ", p->key);
-		printf("\n");
-	}
-}
-int h(int key) {
-	return key % M;
-}
-
-int main() {
-
-	HashType HT[M];
-	init(HT);
-
-	srand(time(NULL));
-
-	for (int i = 0; i < 20; i++)
-		insertItem(HT, rand() % 90 + 10);
-	printHash(HT);
-
-
-	printf("\n ì‚­ì œí•  í‚¤ ìž…ë ¥: ");
-	int key;
-	scanf("%d",&key);
-	printf("\ní‚¤ ê°’ %dê°€ %dê°œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n\n", key, removeElement(HT, key));
-	printHash(HT); // ë°°ì—´ì€ ì£¼ì†Œ ì „ë‹¬
-
-	return 0;
-}
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <time.h>
+//#define M 13
+//
+//typedef struct HashNode {
+//	int key;
+//	struct HashNode* next;
+//}HashType;
+//
+//void init(HashType* HT) {
+//	for (int i = 0; i < M; i++) {
+//		HT[i].key = 0;
+//		HT[i].next = NULL;
+//	}
+//}
+//
+//void insertItem(HashType* HT, int key) {
+//	int v = h(key);
+//	HashType* node = (HashType*)malloc(sizeof(HashType));
+//	node->key = key;
+//	// addFirst¿¬»ê
+//	node->next = HT[v].next; // Áö±Ý ¸¸µç nodeÀÇ next¿¡ ÇöÀç HT[v]ÀÇ first ¿¬°áÇØÁÜ
+//	HT[v].next = node;
+//}
+//int removeElement(HashType* HT, int key) {
+//	int v = h(key);
+//	int count = 0; // °°Àº Å°°¡ ¸î°³ »èÁ¦µÆ´ÂÁö
+//	// »èÁ¦ÇÑ ³ëµå ±â¾ï
+//	// HashTypeÀÇ ÁÖ¼Ò¸¦ ±â¾ïÇÏ´Â Æ÷ÀÎÅÍ º¯¼ö p
+//	// ¿¡´Ù, HT[v]´Â HashTypeÀÓ. HashTypeÀÇ ÁÖ¼Ò ÀúÀå!
+//	HashType* p = &HT[v];
+//	HashType* q;
+//
+//	while (p->next) {
+//		if (p->next->key == key) {
+//			count++;
+//			//q´Â »èÁ¦µÉ ³ëµå
+//			q = p->next;
+//			p->next = q->next;
+//			free(q);
+//		}
+//		else
+//			p = p->next;
+//	}
+//	return count;
+//}
+//int findElement(HashType* HT, int key) {
+//	int v = h(key);
+//	int count;
+//	HashType* p;
+//	for (p = HT[v].next; p != NULL; p = p->next) {
+//		if (p->key == key)
+//			count++;
+//	}
+//	return count; 
+//}
+//
+//void printHash(HashType* HT) {
+//	HashType* p;
+//	for (int i = 0; i < M; i++) {
+//		printf("HT[%02d] : ", i);
+//		for (p = HT[i].next; p != NULL; p = p->next)
+//			printf("(%d) ", p->key);
+//		printf("\n");
+//	}
+//}
+//int h(int key) {
+//	return key % M;
+//}
+//
+//int main() {
+//
+//	HashType HT[M];
+//	init(HT);
+//
+//	srand(time(NULL));
+//
+//	for (int i = 0; i < 20; i++)
+//		insertItem(HT, rand() % 90 + 10);
+//	printHash(HT);
+//
+//
+//	printf("\n »èÁ¦ÇÒ Å° ÀÔ·Â: ");
+//	int key;
+//	scanf("%d",&key);
+//	printf("\nÅ° °ª %d°¡ %d°³ »èÁ¦µÇ¾ú½À´Ï´Ù.\n\n", key, removeElement(HT, key));
+//	printHash(HT); // ¹è¿­Àº ÁÖ¼Ò Àü´Þ
+//
+//	return 0;
+//}
