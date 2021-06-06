@@ -7,7 +7,7 @@
 
 typedef struct {
 	int key;
-	int probeCount; //¸î¹ø¿¡ °ÉÃÄ¼­ ÀúÀåÀÌµÇ´ÂÁö
+	int probeCount; //ëª‡ë²ˆì— ê±¸ì³ì„œ ì €ì¥ì´ë˜ëŠ”ì§€
 }Bucket;
 
 typedef struct {
@@ -25,38 +25,38 @@ int h(int key) {
 	return key % M;
 }
 
-//ÀÌÁßÇØ½Ì¿¡¼±, 13º¸´Ù ÀÛÀº °¡Àå Å« ¼Ò¼ö¸¦ »ç¿ë
+//ì´ì¤‘í•´ì‹±ì—ì„ , 13ë³´ë‹¤ ì‘ì€ ê°€ì¥ í° ì†Œìˆ˜ë¥¼ ì‚¬ìš©
 int h2(int key) {
 	return 11 - (key % 11);
 }
 
-//¼±ÇüÁ¶»ç¹ı
+//ì„ í˜•ì¡°ì‚¬ë²•
 int getNextBucketLinear(int v, int i) {
 	return (v + i) % M;
 }
 
-//ÀÌÂ÷Á¶»ç¹ı
+//ì´ì°¨ì¡°ì‚¬ë²•
 int getNextBucketQuadratic(int v, int i) {
 	return (v + i*i) % M;
 
 }
 
-//ÀÌÁßÇØ½Ì¹ı
+//ì´ì¤‘í•´ì‹±ë²•
 int getNextBucketDouble(int v, int i, int key) {
 	return (v + i * h2(key)) % M;
 }
 int isEmpty(HashType* HT, int b) {
-	// b´Â ÀÎµ¦½º
+	// bëŠ” ì¸ë±ìŠ¤
 	return HT->A[b].key == 0;
-	// 0ÀÌ¸é ºñ¾îÀÖ´Â °Í
+	// 0ì´ë©´ ë¹„ì–´ìˆëŠ” ê²ƒ
 }
 
 int findElement(HashType* HT, int key) {
-	int v = h(key); //v´Â À§Ä¡
+	int v = h(key); //vëŠ” ìœ„ì¹˜
 	int i = 0;
 
 	while (i < M) {
-		int b = getNextBucketQuadratic(v, i); //=> ÀÌÂ÷Á¶»ç¹ı
+		int b = getNextBucketQuadratic(v, i); //=> ì´ì°¨ì¡°ì‚¬ë²•
 
 		if (isEmpty(HT, b))
 			return 0;
@@ -69,19 +69,19 @@ int findElement(HashType* HT, int key) {
 }
 
 void insertItem(HashType* HT, int key) {
-	int v = h(key); //v´Â À§Ä¡
+	int v = h(key); //vëŠ” ìœ„ì¹˜
 	int i = 0;
-	int count = 0;//½ÃµµÈ½¼ö
+	int count = 0;//ì‹œë„íšŸìˆ˜
 	while (i < M) {
 		count++;
-		//int b = getNextBucketLinear(v, i); //¼±ÇüÁ¶»ç¹ı
-		int b = getNextBucketQuadratic(v, i); //ÀÌÂ÷Á¶»ç¹ı
-		//int b = getNextBucketDouble(v, i, key); //ÀÌÁßÇØ½Ì¹ı
+		//int b = getNextBucketLinear(v, i); //ì„ í˜•ì¡°ì‚¬ë²•
+		int b = getNextBucketQuadratic(v, i); //ì´ì°¨ì¡°ì‚¬ë²•
+		//int b = getNextBucketDouble(v, i, key); //ì´ì¤‘í•´ì‹±ë²•
 		
 		if (isEmpty(HT, b)) {
 			HT->A[b].key = key;
 			HT->A[b].probeCount = count;
-			return; // »ğÀÔµÆÀ¸¸é return
+			return; // ì‚½ì…ëìœ¼ë©´ return
 		}
 		else
 			i++;
@@ -90,17 +90,17 @@ void insertItem(HashType* HT, int key) {
 
 
 int removeElement(HashType* HT, int key) {
-	int v = h(key); //v´Â À§Ä¡
+	int v = h(key); //vëŠ” ìœ„ì¹˜
 	int i = 0;
 
 	while (i < M) {
-		int b = getNextBucketQuadratic(v, i); //ÀÌÂ÷Á¶»ç¹ı
+		int b = getNextBucketQuadratic(v, i); //ì´ì°¨ì¡°ì‚¬ë²•
 
 		if (isEmpty(HT, b)) 
 			return 0; 
 		
 		else if (HT->A[b].key == key) {
-			HT->A[b].key = 0; //key°ªÀ» 0À¸·Î ¸¸µé¸é, ºñ¾îÀÖ´Ù´Â ÀÇ¹Ì!
+			HT->A[b].key = 0; //keyê°’ì„ 0ìœ¼ë¡œ ë§Œë“¤ë©´, ë¹„ì–´ìˆë‹¤ëŠ” ì˜ë¯¸!
 			return key;
 		}
 		else
@@ -113,7 +113,7 @@ int removeElement(HashType* HT, int key) {
 
 
 void printHashTable(HashType* HT) {
-	// probe´Â ½ÃµµÈ½¼ö.
+	// probeëŠ” ì‹œë„íšŸìˆ˜.
 	printf("Bucket Key Probe\n");
 	printf("============================\n");
 	for (int i = 0; i < M; i++)
@@ -136,20 +136,20 @@ int main(){
 	printHashTable(&HT);
 
 	int key;
-	printf("Å½»öÇÒ Å° ÀÔ·Â: ");
+	printf("íƒìƒ‰í•  í‚¤ ì…ë ¥: ");
 	scanf("%d",&key);
 	if (findElement(&HT, key))
-		printf("\nÅ° °ª %dÀÌ(°¡) Á¸ÀçÇÕ´Ï´Ù.\n", key);
+		printf("\ní‚¤ ê°’ %dì´(ê°€) ì¡´ì¬í•©ë‹ˆë‹¤.\n", key);
 	else
-		printf("\nÅ° °ª %dÀÌ(°¡) ¾ø½À´Ï´Ù.\n", key);
+		printf("\ní‚¤ ê°’ %dì´(ê°€) ì—†ìŠµë‹ˆë‹¤.\n", key);
 
 
-	printf("»èÁ¦ÇÒ Å° ÀÔ·Â: ");
+	printf("ì‚­ì œí•  í‚¤ ì…ë ¥: ");
 	scanf("%d", &key);
 	if (removeElement(&HT, key))
-		printf("\nÅ° °ª %dÀÌ(°¡) »èÁ¦µÇ¾ú½À´Ï´Ù.\n", key);
+		printf("\ní‚¤ ê°’ %dì´(ê°€) ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.\n", key);
 	else
-		printf("\nÅ° °ª %dÀÌ(°¡) ¾ø½À´Ï´Ù.\n", key);
+		printf("\ní‚¤ ê°’ %dì´(ê°€) ì—†ìŠµë‹ˆë‹¤.\n", key);
 	printf("\n");
 	printHashTable(&HT);
 
