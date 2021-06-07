@@ -2,24 +2,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define QSIZE 50
-//°£¼± ¿¬°á¸®½ºÆ®
+//ê°„ì„  ì—°ê²°ë¦¬ìŠ¤íŠ¸
 typedef struct Edge{
-	int isTree; // Æ®¸®, ¹é ¸¶Å·ÇÏ´Â º¯¼ö
-	struct Edge* next; // °£¼± ¿¬°á¸®½ºÆ®
-	int v1, v2; // ½ÃÀÛ³ëµå, ³¡³ëµå
+	int isTree; // íŠ¸ë¦¬, ë°± ë§ˆí‚¹í•˜ëŠ” ë³€ìˆ˜
+	struct Edge* next; // ê°„ì„  ì—°ê²°ë¦¬ìŠ¤íŠ¸
+	int v1, v2; // ì‹œì‘ë…¸ë“œ, ëë…¸ë“œ
 }Edge;
 
-// ºÎÂø°£¼±
+// ë¶€ì°©ê°„ì„ 
 typedef struct IncidentEdge{
-	Edge* e; // °£¼± Á¤º¸!
-	int adjVertex; // ÀÎÁ¢Á¤Á¡
-	struct IncidentEdge* next; // ºÎÂø°£¼± ¿¬°á¸®½ºÆ®
+	Edge* e; // ê°„ì„  ì •ë³´!
+	int adjVertex; // ì¸ì ‘ì •ì 
+	struct IncidentEdge* next; // ë¶€ì°©ê°„ì„  ì—°ê²°ë¦¬ìŠ¤íŠ¸
 }IncidentEdge;
-//Á¤Á¡ ¿¬°á¸®½ºÆ®
+//ì •ì  ì—°ê²°ë¦¬ìŠ¤íŠ¸
 typedef struct Vertex{
-	int num; // Á¤Á¡¹øÈ£
-	IncidentEdge* top; // ºÎÂø°£¼±
-	struct Vertex* next; // ´ÙÀ½ Á¤Á¡ ¿¬°á
+	int num; // ì •ì ë²ˆí˜¸
+	IncidentEdge* top; // ë¶€ì°©ê°„ì„ 
+	struct Vertex* next; // ë‹¤ìŒ ì •ì  ì—°ê²°
 	int isFresh;
 }Vertex;
 
@@ -42,12 +42,12 @@ QueueType* queue;
 
 void makeVertices() {
 	Vertex* v = (Vertex*)malloc(sizeof(Vertex));
-	v->num = ++vCount; //1ºÎÅÍ ÀúÀå
+	v->num = ++vCount; //1ë¶€í„° ì €ì¥
 	v->top = NULL;
 	v->next = NULL;
 
 	v->isFresh = 0;
-	Vertex* p = vHead; // Æ÷ÀÎÅÍ
+	Vertex* p = vHead; // í¬ì¸í„°
 	if (vHead == NULL) {
 		vHead = v;
 	}
@@ -64,14 +64,14 @@ Vertex* findVertex(Vertex* v) {
 	return p;
 }
 
-// ****** int av ÀÎ°Í ÁÖÀÇ
+// ****** int av ì¸ê²ƒ ì£¼ì˜
 void InsertIncidentEdges(Vertex* v, int av, Edge* e) {
 	IncidentEdge* p = (IncidentEdge*)malloc(sizeof(IncidentEdge));
-	p->adjVertex = av; // ÀÎÁ¢Á¤Á¡
-	p->e = e; // °£¼±
+	p->adjVertex = av; // ì¸ì ‘ì •ì 
+	p->e = e; // ê°„ì„ 
 	p->next = NULL;
 
-	//addLast Ã³¸®
+	//addLast ì²˜ë¦¬
 	IncidentEdge* q = v->top;
 	if (q == NULL)
 		v->top = p;
@@ -82,7 +82,7 @@ void InsertIncidentEdges(Vertex* v, int av, Edge* e) {
 	}
 }
 
-// v1°ú v2»çÀÌ¿¡ edge ¸¸µé±â
+// v1ê³¼ v2ì‚¬ì´ì— edge ë§Œë“¤ê¸°
 void insertEdges(int v1, int v2) {
 	Edge* e = (Edge*)malloc(sizeof(Edge));
 	e->isTree = 0;
@@ -90,7 +90,7 @@ void insertEdges(int v1, int v2) {
 	e->v1 = v1;
 	e->v2 = v2;
 
-	//¿§Áö ¿¬°á¸®½ºÆ® ¿¬°á
+	//ì—£ì§€ ì—°ê²°ë¦¬ìŠ¤íŠ¸ ì—°ê²°
 	Edge* p = eHead;
 	if (p == NULL) {
 		eHead = e;
@@ -101,7 +101,7 @@ void insertEdges(int v1, int v2) {
 		p->next = e;
 	}
 
-	// incidentEdge ¿¬°á
+	// incidentEdge ì—°ê²°
 	Vertex* v = findVertex(v1);
 	InsertIncidentEdges(v, v2, e);
 
@@ -109,7 +109,7 @@ void insertEdges(int v1, int v2) {
 	InsertIncidentEdges(v, v1, e);
 }
 
-// p->next!=NULL °ú p!=NULL
+// p->next!=NULL ê³¼ p!=NULL
 void print() {
 	Vertex* p = vHead;
 	for (; p!= NULL; p = p->next) {
@@ -125,14 +125,14 @@ void enqueue(QueueType* q, Vertex* v) {
 	if (q->top != QSIZE) {
 		q->v[q->top] = v;
 		q->top++;
-		//printf("enqueue ¼º°ø, top: %d\n", q->top);
+		//printf("enqueue ì„±ê³µ, top: %d\n", q->top);
 	}
 }
 Vertex* dequeue(QueueType* q) {
 	if (q->top != q->rear) {
 		Vertex* v = q->v[q->rear];
 		q->rear++;
-		//printf("dequeue ¼º°ø, rear: %d\n", q->rear);
+		//printf("dequeue ì„±ê³µ, rear: %d\n", q->rear);
 		return v;
 	}
 	else
@@ -140,20 +140,20 @@ Vertex* dequeue(QueueType* q) {
 }
 void bfs(Vertex* v) {
 
-	v->isFresh = 1; // ¹æ¹®±â·Ï Ãß°¡
+	v->isFresh = 1; // ë°©ë¬¸ê¸°ë¡ ì¶”ê°€
 
-	//1. Å¥¿¡ v ³Ö±â
+	//1. íì— v ë„£ê¸°
 	enqueue(queue, v);
 
-	// 2. Å¥°¡ ¼ÒÁøµÉ ¶§±îÁö ¹İº¹
+	// 2. íê°€ ì†Œì§„ë  ë•Œê¹Œì§€ ë°˜ë³µ
 	while (queue->top != queue->rear) {
 		Vertex* p = dequeue(queue);
-		p->isFresh = 1; // Å¥¿¡¼­ ÃßÃâÇÑ Á¤Á¡ ¹æ¹®
+		p->isFresh = 1; // íì—ì„œ ì¶”ì¶œí•œ ì •ì  ë°©ë¬¸
 		
 		printf("[%d]=> ",p->num);
 
 		IncidentEdge* q = p->top;
-		// ÀÎÁ¢°£¼±ÀÌ ºô¶§±îÁö 
+		// ì¸ì ‘ê°„ì„ ì´ ë¹Œë•Œê¹Œì§€ 
 		while (q!= NULL) {
 
 			int av = q->adjVertex;
@@ -161,8 +161,8 @@ void bfs(Vertex* v) {
 			if (next_vt->isFresh == 1)
 				q = q->next;
 			else {
-				next_vt->isFresh = 1; //¹æ¹®ÇÑ ³ëµå Ã¼Å©
-				//printf("%dÀÇ adjVertex: %d\n", p->num, av);
+				next_vt->isFresh = 1; //ë°©ë¬¸í•œ ë…¸ë“œ ì²´í¬
+				//printf("%dì˜ adjVertex: %d\n", p->num, av);
 				enqueue(queue, next_vt);
 				q = q->next;
 			}
@@ -171,11 +171,11 @@ void bfs(Vertex* v) {
 }
 
 int main() {
-	// Å¥ ÃÊ±âÈ­
+	// í ì´ˆê¸°í™”
 	queue = (QueueType*)malloc(sizeof(queue));
 	initQueue(queue);
 
-	// ÃÊ±âÈ­
+	// ì´ˆê¸°í™”
 	for (int i = 0; i < 9; i++)
 		makeVertices();
 
