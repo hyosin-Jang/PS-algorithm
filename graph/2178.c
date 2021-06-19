@@ -1,44 +1,94 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#define SIZE 101
-
-int arr[SIZE][SIZE];
-int visit[SIZE][SIZE];
-
-typedef struct node {
-	int x;
-	int y;
-}Node;
-
-// queueë¼ëŠ” ì´ë¦„ì˜ node ë°°ì—´
-Node queue[10001];
-
-int front = 0, end = 0, max = 0;
-int vectX[4] = { 0,0,1,-1 };
-int vectY[4] = { 1,-1,0,0 };
-
-Node deque() {
-	Node temp = queue[front];
-	front = (front + 1) % 10000;
-	return temp;
-}
-
-int main() {
-	int row = 0, col = 0;
-	scanf("%d %d", &row, &col);
-
-	// scanfëŠ” ë¬¸ì í•˜ë‚˜ë§Œ 
-	for (int i = 1; i <= row;i++) {
-		for (int j = 1; j <= col; j++)
-			scanf("%1d", &arr[i][j]);
-	}
-
-	visit[1][1] = 1;
-	enque(1, 1);
-	//ë„ˆë¹„ ìš°ì„ íƒìƒ‰
-	BFS();
-	printf("%d\n", visit[row][col]);
-
-	return 0;
-}
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define SIZE 101
+//
+//int arr[SIZE][SIZE] = {0};
+//int visited[SIZE][SIZE] = {0};
+//
+//typedef struct Coor {
+//	int x; //xÁÂÇ¥
+//	int y; //yÁÂÇ¥
+//}Coor;
+//
+//
+//Coor queue[10001];
+//
+//int front = 0, end = 0, max = 0;
+//
+//
+//Coor deque() {
+//	Coor temp = queue[front];
+//	front = (front + 1) % 10000;
+//	return temp;
+//}
+//
+//void enque(int x, int y) {
+//	queue[end].x = x;
+//	queue[end].y = y;
+//	end = (end + 1) % 10000;
+//}
+//
+//void BFS() {
+//	int x, y;
+//
+//	while (front!=end) {
+//		// 1. dequeueÇÑ´Ù.
+//		Coor c = deque();
+//
+//		// 2. dequeÇÑ ÁÂÇ¥¿¡¼­ °¥ ¼ö ÀÖ°í, ¹æ¹®ÇÏÁö ¾ÊÀº °÷µéÀ» enqueÇÑ´Ù.
+//		x = c.x;
+//		y = c.y;
+//
+//		// ¹æ¹®ÇÑ °÷Àº 1·Î Ç¥½Ã
+//
+//		// À­¹æÇâ, ¹æ¹®ÇÏÁö ¾Ê¾Ò°í, °¥ ¼ö ÀÖ´Â ±æÀÌ¸é 
+//		if (visited[x - 1][y] == 0 && arr[x - 1][y] != 0) {
+//			enque(x - 1, y);
+//			visited[x - 1][y] = visited[x][y] + 1;
+//		}
+//		// ¿À¸¥ÂÊ
+//		if (visited[x][y + 1] == 0 && arr[x][y + 1] != 0) {
+//			enque(x, y + 1);
+//			visited[x][y + 1] = visited[x][y] + 1;
+//		}
+//		// ¾Æ·¡
+//		if (visited[x + 1][y] == 0 && arr[x + 1][y] != 0) {
+//			enque(x + 1, y);
+//			visited[x +1][y] =  visited[x][y] + 1;
+//		}
+//		// ¿ŞÂÊ
+//		if (visited[x][y - 1] == 0 && arr[x][y - 1] != 0) {
+//			enque(x, y - 1);
+//			visited[x][y-1] = visited[x][y] + 1;
+//		}
+//	}
+//}
+//
+//int main() {
+//	int row = 0, col = 0;
+//	scanf("%d %d", &row, &col);
+//
+//	// scanf´Â ¹®ÀÚ ÇÏ³ª¸¸ 
+//	for (int i = 1; i <= row;i++) {
+//		for (int j = 1; j <= col; j++)
+//			scanf("%1d", &arr[i][j]);
+//	}
+//
+//	visited[1][1] = 1;
+//	enque(1, 1);
+//	//ÃÖ´Ü°Å¸® => ³Êºñ ¿ì¼±Å½»ö
+//	BFS();
+//	printf("\n\n");
+//
+//	for (int i = 1; i <= row;i++) {
+//		for (int j = 1; j <= col; j++)
+//			printf("%3d", visited[i][j]);
+//		printf("\n");
+//	}
+//	
+//
+//	printf("%d\n", visited[row][col]);
+//
+//	return 0;
+//}
