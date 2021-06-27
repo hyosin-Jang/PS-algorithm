@@ -4,24 +4,24 @@
 
 typedef struct Node {
 	int key;
-	int parent; // ºÎ¸ğÀÎµ¦½º, ¸¸¾à ºÎ¸ğ »èÁ¦ÇßÀ¸¸é ÀÌ°Å 0À¸·Î ¹Ù²ãÁÖ±â
-	int child; // ÀÚ½Ä °³¼ö
+	int parent; // ë¶€ëª¨ì¸ë±ìŠ¤, ë§Œì•½ ë¶€ëª¨ ì‚­ì œí–ˆìœ¼ë©´ ì´ê±° 0ìœ¼ë¡œ ë°”ê¿”ì£¼ê¸°
+	int child; // ìì‹ ê°œìˆ˜
 }Node;
 
 Node node[51];
 int arr[51];
-int compare(const void* a, const void* b)    // ¿À¸§Â÷¼ø ºñ±³ ÇÔ¼ö ±¸Çö
+int compare(const void* a, const void* b)    // ì˜¤ë¦„ì°¨ìˆœ ë¹„êµ í•¨ìˆ˜ êµ¬í˜„
 {
-	int num1 = *(int*)a;    // void Æ÷ÀÎÅÍ¸¦ int Æ÷ÀÎÅÍ·Î º¯È¯ÇÑ µÚ ¿ªÂüÁ¶ÇÏ¿© °ªÀ» °¡Á®¿È
-	int num2 = *(int*)b;    // void Æ÷ÀÎÅÍ¸¦ int Æ÷ÀÎÅÍ·Î º¯È¯ÇÑ µÚ ¿ªÂüÁ¶ÇÏ¿© °ªÀ» °¡Á®¿È
+	int num1 = *(int*)a;    // void í¬ì¸í„°ë¥¼ int í¬ì¸í„°ë¡œ ë³€í™˜í•œ ë’¤ ì—­ì°¸ì¡°í•˜ì—¬ ê°’ì„ ê°€ì ¸ì˜´
+	int num2 = *(int*)b;    // void í¬ì¸í„°ë¥¼ int í¬ì¸í„°ë¡œ ë³€í™˜í•œ ë’¤ ì—­ì°¸ì¡°í•˜ì—¬ ê°’ì„ ê°€ì ¸ì˜´
 
-	if (num1 < num2)    // a°¡ bº¸´Ù ÀÛÀ» ¶§´Â
-		return -1;      // -1 ¹İÈ¯
+	if (num1 < num2)    // aê°€ bë³´ë‹¤ ì‘ì„ ë•ŒëŠ”
+		return -1;      // -1 ë°˜í™˜
 
-	if (num1 > num2)    // a°¡ bº¸´Ù Å¬ ¶§´Â
-		return 1;       // 1 ¹İÈ¯
+	if (num1 > num2)    // aê°€ bë³´ë‹¤ í´ ë•ŒëŠ”
+		return 1;       // 1 ë°˜í™˜
 
-	return 0;    // a¿Í b°¡ °°À» ¶§´Â 0 ¹İÈ¯
+	return 0;    // aì™€ bê°€ ê°™ì„ ë•ŒëŠ” 0 ë°˜í™˜
 }
 int main() { 
 	int n, p, k, root, cnt = 0; 
@@ -32,12 +32,12 @@ int main() {
 		scanf("%d", &arr[i]);
 	getchar();
 
-	printf("ÀÔ·Â¸¸¹Ş°í Á¤·Ä Àü\n");
+	printf("ì…ë ¥ë§Œë°›ê³  ì •ë ¬ ì „\n");
 	for (int i = 0; i < n;i++)
 		printf("%d ", arr[i]);
 	printf("\n");
 
-	// arr ¿À¸§Â÷¼ø Á¤·Ä - bubble sort
+	// arr ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ - bubble sort
 	for (int i = 0; i < n-1; i++) {
 		for (int j = 0; j < n-1 - i; j++) {
 			if (arr[j] > arr[j + 1]) {
@@ -48,9 +48,6 @@ int main() {
 		}
 	}
 
-
-
-
 	//qsort(arr, sizeof(arr) / sizeof(int), sizeof(int), compare);
 
 	for (int i = 0; i < n ; i++)
@@ -58,7 +55,7 @@ int main() {
 	printf("\n");
 
 
-	//node ¹è¿­ ÃÊ±âÈ­
+	//node ë°°ì—´ ì´ˆê¸°í™”
 	for (int i = 0; i < 51; i++) {
 		node[i].key = -2;
 		node[i].parent = -2;
@@ -67,17 +64,17 @@ int main() {
 
 	for(int i = 0; i < n; i++){ 
 		int p = arr[i];
-		if (p == -1) node[0].key = i; // p°¡ -1ÀÌ¸é ·çÆ®³ëµå keyÀÖ´Ù°í ¼³Á¤
+		if (p == -1) node[0].key = i; // pê°€ -1ì´ë©´ ë£¨íŠ¸ë…¸ë“œ keyìˆë‹¤ê³  ì„¤ì •
 		else {
 			node[i].key=i; 
-			node[i].parent = p; // ºÎ¸ğ ÀÎµ¦½º Ç¥½Ã
+			node[i].parent = p; // ë¶€ëª¨ ì¸ë±ìŠ¤ í‘œì‹œ
 			node[p].child++;
 			}
 		} 
 
 	scanf("%d", &k); 
-	node[k].key = -2; // Áö¿ì´Â °Í = -2
-	node[k].child = 0; // ÀÚ½Ä °³¼ö -2
+	node[k].key = -2; // ì§€ìš°ëŠ” ê²ƒ = -2
+	node[k].child = 0; // ìì‹ ê°œìˆ˜ -2
 
 	for (int i = 0; i < n;i++) {
 		if (i == 0)
@@ -90,16 +87,16 @@ int main() {
 		}
 	}
 	
-	//¸®ÇÁ³ëµå = ºÎ¸ğ´Â ÀÖÁö¸¸, ÀÚ½Å key´Â 0
+	//ë¦¬í”„ë…¸ë“œ = ë¶€ëª¨ëŠ” ìˆì§€ë§Œ, ìì‹  keyëŠ” 0
 	for(int i = 0; i < n; i++) {
 		printf("node[%2d].key: %2d\n", i, node[i].key);
 		printf("node[%2d].parent: %2d\n", i, node[i].parent);
 		printf("node[%2d].childnum: %2d\n", i, node[i].child);
 		printf("\n");
-		// ·çÆ®¸¦ Áö¿ü´Ù¸é
+		// ë£¨íŠ¸ë¥¼ ì§€ì› ë‹¤ë©´
 		if (node[0].key == -2)
 			break;
-		// Ã³À½ºÎÅÍ ¼øÈ¸ÇÏ¸é¼­ parent´Â ÀÎµ¦½º´Ï±î 0ÀÌ»ó
+		// ì²˜ìŒë¶€í„° ìˆœíšŒí•˜ë©´ì„œ parentëŠ” ì¸ë±ìŠ¤ë‹ˆê¹Œ 0ì´ìƒ
 		if (node[i].key >0 && node[i].parent >= 0 && node[i].child==0)
 			cnt++;
 		printf("cnt: %d\n", cnt);
