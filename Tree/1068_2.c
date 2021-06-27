@@ -1,112 +1,109 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+#include <stdio.h> 
 #include <stdlib.h>
 
-int n, parent, del, cnt = 0, k = 0, num = 0;
-
-typedef struct TreeNode {
+typedef struct Node {
 	int key;
-	TreeNode* left, * right;
-}TreeNode;
+	int parent; // 부모인덱스, 만약 부모 삭제했으면 이거 0으로 바꿔주기
+	int child; // 자식 개수
+}Node;
 
-typedef struct TreeType {
-	TreeNode* root;
-}TreeType;
+Node node[51];
+int arr[51];
+int compare(const void* a, const void* b)    // 오름차순 비교 함수 구현
+{
+	int num1 = *(int*)a;    // void 포인터를 int 포인터로 변환한 뒤 역참조하여 값을 가져옴
+	int num2 = *(int*)b;    // void 포인터를 int 포인터로 변환한 뒤 역참조하여 값을 가져옴
 
-void initTree(TreeType* T) {
-	// 루트노드만들고
-	T->root = (TreeNode*)malloc(sizeof(TreeNode));
-	T->root->left = T->root->right = NULL;
+	if (num1 < num2)    // a가 b보다 작을 때는
+		return -1;      // -1 반환
+
+	if (num1 > num2)    // a가 b보다 클 때는
+		return 1;       // 1 반환
+
+	return 0;    // a와 b가 같을 때는 0 반환
 }
-int dfs(TreeNode* T) {
-	// 1. k를 지웠다면
-	if (T->key == NULL) {
-		return 0;
+int main() { 
+	int n, p, k, root, cnt = 0; 
+	scanf("%d", &n); 
+	getchar();
+
+	for (int i = 0; i < n; i++)
+		scanf("%d", &arr[i]);
+	getchar();
+
+	printf("입력만받고 정렬 전\n");
+	for (int i = 0; i < n;i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+
+	// arr 오름차순 정렬 - bubble sort
+	for (int i = 0; i < n-1; i++) {
+		for (int j = 0; j < n-1 - i; j++) {
+			if (arr[j] > arr[j + 1]) {
+				int temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
 	}
-	// 2. 0이 아닌 k가 0이라면, 
-	if (k != 0 && T->key == NULL) {
-		return 0;
+
+
+
+
+	//qsort(arr, sizeof(arr) / sizeof(int), sizeof(int), compare);
+
+	for (int i = 0; i < n ; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+
+
+	//node 배열 초기화
+	for (int i = 0; i < 51; i++) {
+		node[i].key = -2;
+		node[i].parent = -2;
+		node[i].child = 0;
 	}
-	// 3. 리프노드라면 cnt++하기
-	if (T->left->key == NULL && T->right->key == NULL) {
-		cnt++;
-		return 0;
-	}
-	// 4. 왼쪽 자식으로 가기
-	if (T->left->key != NULL)
-		dfs(T->left);
-	// 4. 오른쪽 자식으로 가기
-	if (Tree[2 * k + 2] != 0)
-		dfs(2 * k + 2);
 
-	printf("마지막 끝");
-
-	return 0;
-}
-int isExternal(TreeNode* w) {
-	// 외부노드면, true 리턴
-	return (w->left == NULL && w->right == NULL);
-}
-
-void expandExternal(TreeNode* w) {
-	TreeNode* l = (TreeNode*)malloc(sizeof(TreeNode));
-	TreeNode* r = (TreeNode*)malloc(sizeof(TreeNode));
-	l->left = NULL;
-	l->right = NULL;
-	r->left = NULL;
-	r->right = NULL;
-	w->left = l;
-	w->right = r;
-}
-TreeNode* treeSearch(TreeNode* v, int k) {
-	//이진탐색
-	if (isExternal(v)) //루트노드면 -1 리턴.
-		return v;
-	if (k == v->key)
-		return v;
-	else if (k < v->key)
-		return treeSearch(v->left, k);
-	else
-		return treeSearch(v->right, k);
-}
-TreeNode* findElement(TreeType* T, int k) {
-	TreeNode* w = treeSearch(T->root, k);
-	if (!isExternal(w))
-		return 0;
-	else
-		return w;
-}
-
-int main() {
-	TreeType* T = (TreeType*)malloc(sizeof(TreeType));
-	initTree(T);
-	TreeNode* w;
-	scanf("%d", &n);
-
-	// 존재하면 1, 없으면 0
-	for (int i = 0; i < n;i++) {
-		scanf("%d", &parent);
-		if (parent == -1)
-			T->root->key = k;
+	for(int i = 0; i < n; i++){ 
+		int p = arr[i];
+		if (p == -1) node[0].key = i; // p가 -1이면 루트노드 key있다고 설정
 		else {
-			// parent 노드찾기
-			w = findElement(T, parent);
-			if (w->left == NULL) {
-				w->left = k;
-				expandExternal(w);
+			node[i].key=i; 
+			node[i].parent = p; // 부모 인덱스 표시
+			node[p].child++;
 			}
-			else {
-				expandExternal(w);
-				w->right = k;
-			}
-			}
-		k++;
+		} 
+
+	scanf("%d", &k); 
+	node[k].key = -2; // 지우는 것 = -2
+	node[k].child = 0; // 자식 개수 -2
+
+	for (int i = 0; i < n;i++) {
+		if (i == 0)
+			continue;
+		int num = node[i].parent;
+		if (node[num].key == -2) {
+			node[i].child = 0;
+			node[i].parent = -2;
+			node[i].key = -2;
+		}
 	}
 	
-	scanf("%d", &del);
-	w = findElement(T, del);
-	w->key = NULL;
-	dfs(T->root);
-	printf("%d", cnt);
-	return 0;
+	//리프노드 = 부모는 있지만, 자신 key는 0
+	for(int i = 0; i < n; i++) {
+		printf("node[%2d].key: %2d\n", i, node[i].key);
+		printf("node[%2d].parent: %2d\n", i, node[i].parent);
+		printf("node[%2d].childnum: %2d\n", i, node[i].child);
+		printf("\n");
+		// 루트를 지웠다면
+		if (node[0].key == -2)
+			break;
+		// 처음부터 순회하면서 parent는 인덱스니까 0이상
+		if (node[i].key >0 && node[i].parent >= 0 && node[i].child==0)
+			cnt++;
+		printf("cnt: %d\n", cnt);
+	}
+	printf("%d", cnt); 
 }
+
