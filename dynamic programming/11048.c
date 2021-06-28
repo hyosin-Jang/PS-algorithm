@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define max(x,y) ((x)>(y) ? (x):(y))
-#define SIZE 1000
+#define SIZE 1001
 
 int arr[SIZE][SIZE];
 int candy[SIZE][SIZE];
