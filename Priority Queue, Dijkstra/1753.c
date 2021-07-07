@@ -6,8 +6,8 @@
 #define min(x, y) ((x) < (y) ? (x) : (y))
 
 int W[S][S];
-int found[S]; // ¹æ¹®ÇÑ Á¤Á¡ Ç¥½Ã 0=false,1=true
-int distance[S]; // ½ÃÀÛÁ¤Á¡À¸·ÎºÎÅÍÀÇ ÃÖ´Ü°æ·Î °Å¸®
+int found[S]; // ë°©ë¬¸í•œ ì •ì  í‘œì‹œ 0=false,1=true
+int distance[S]; // ì‹œì‘ì •ì ìœ¼ë¡œë¶€í„°ì˜ ìµœë‹¨ê²½ë¡œ ê±°ë¦¬
 
 int choose(int n) {
 	int i, min, minpos;
@@ -22,27 +22,22 @@ int choose(int n) {
 }
 
 void shortest_path(int V, int K) {
-	// distance ¹è¿­ ÃÊ±âÈ­
+	// distance ë°°ì—´ ì´ˆê¸°í™”
 	int i, u, weight;
 	W[K][K] = 0;
 	for (i = 1; i <= V; i++) {
 		distance[i] = W[K][i];
-		found[i] = 0; // false·Î ÃÊ±âÈ­
+		found[i] = 0; // falseë¡œ ì´ˆê¸°í™”
 	}
 	found[K] = 1;
-	distance[K] = 0; // ÀÚ±âÀÚ½ÅÀº 0
-
-	//printf("distance: ");
-	//for (int i = 1; i <= V; i++)
-	//	printf("%2d ", distance[i]);
-	//printf("\n");
-
+	distance[K] = 0; // ìê¸°ìì‹ ì€ 0
+	
 	for (i = 1; i <= V; i++) {
 		u = choose(V);
 		//printf("u: %d\n", u);
-		found[u] = 1; // ¹æ¹®Çß´Ù°í Ç¥½Ã
+		found[u] = 1; // ë°©ë¬¸í–ˆë‹¤ê³  í‘œì‹œ
 		for (weight = 1; weight <= V; weight++)
-			if (!found[weight]) // °¡ÁßÄ¡ °»½Å
+			if (!found[weight]) // ê°€ì¤‘ì¹˜ ê°±ì‹ 
 				if (distance[u] + W[u][weight] < distance[weight])
 					distance[weight] = distance[u] + W[u][weight];
 	}
@@ -52,16 +47,14 @@ void shortest_path(int V, int K) {
 int main() {
 	int V, E, K, u, v, w;
 
-	scanf("%d %d", &V, &E); // Á¤Á¡, °£¼± °³¼ö
+	scanf("%d %d", &V, &E); // ì •ì , ê°„ì„  ê°œìˆ˜
 	getchar();
-	scanf("%d", &K); // ½ÃÀÛÁ¤Á¡
+	scanf("%d", &K); // ì‹œì‘ì •ì 
 	getchar();
 
 	for (int i = 1; i <= V; i++)
 		for (int j = 1; j <= V; j++)
-			W[i][j] = INF; //INF·Î ÃÊ±âÈ­
-	
-
+			W[i][j] = INF; //INFë¡œ ì´ˆê¸°í™”
 
 	for (int i = 0; i < E; i++) {
 		scanf("%d %d %d", &u, &v, &w);
@@ -86,6 +79,5 @@ int main() {
 			printf("%d\n", distance[i]);
 	}
 	
-
 	return 0;
 }
