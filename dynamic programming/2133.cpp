@@ -1,9 +1,9 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
 int main() {
 	int n;
-	scanf("%d",&n);
+	cin >> n;
 
 	int dp[31] = { 0 };
 
@@ -18,7 +18,7 @@ int main() {
 		for (int j = 4; j <= i; j += 2)
 			dp[i] += dp[i - j] * 2;
 	}
-	printf("%d", dp[n]);
+	cout << dp[n];
 	return 0;
 }
  
