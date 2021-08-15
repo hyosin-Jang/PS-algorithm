@@ -1,29 +1,38 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <cstdio>
 using namespace std;
 
 vector <int> v;
 int main() {
-	int n, m, d, f=1, result=0;
-	cin >> n >> m;
-	
-	for (int i = 0; i < n; i++)
-		cin >> v[i];
+	int n, m, tmp,d, f=1, r=0;
+	cin >> n;
+	cin >> m;
 
-	// ³»¸²Â÷¼ø
+	
+	for (int i = 0; i < n; i++) {
+		cin >> tmp;
+		v.push_back(tmp);
+	}
+
+	// ë‚´ë¦¼ì°¨ìˆœ
 	sort(v.begin(), v.end(), greater<int>());
 	
+
 	for (int i = 0; i < n-1; i++) {
 		d = v[i] - v[i+1];
-		if ((result+d*f) >= m) {
-			result = v[0]-result+(m - result) / f;
+
+		if (d*f >= m) {
+			r += m / f;
+			printf("%d", v[0]-r);
 			break;
 		}
-		result += d * f;
-		f += 1;
+
+		m -= d * f; // m=3
+		f += 1; // f=2
+		r += d;
 	}
-	cout << result;
 
 	return 0;
 }
