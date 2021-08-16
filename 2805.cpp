@@ -2,36 +2,33 @@
 #include <algorithm>
 #include <vector>
 #include <cstdio>
+#include <cmath>
 using namespace std;
 
-vector <int> v;
+float n, m, tmp, d, f = 1, r = 0;
+vector <float> v;
 int main() {
-	int n, m, tmp,d, f=1, r=0;
-	cin >> n;
-	cin >> m;
+	cin >> n >> m;
 
-	
 	for (int i = 0; i < n; i++) {
 		cin >> tmp;
 		v.push_back(tmp);
 	}
 
-	// 내림차순
-	sort(v.begin(), v.end(), greater<int>());
+	sort(v.begin(), v.end(), greater<float>());
 	
-
 	for (int i = 0; i < n-1; i++) {
 		d = v[i] - v[i+1];
 
 		if (d*f >= m) {
-			r += m / f;
-			printf("%d", v[0]-r);
+			tmp = m / f;
+			r += ceil(tmp);
+			printf("%d", (int)(v[0]-r));
 			break;
 		}
-
-		m -= d * f; // m=3
-		f += 1; // f=2
-		r += d;
+			m -= d * f; // m=3
+			f += 1; // f=2
+			r += d;
 	}
 
 	return 0;
