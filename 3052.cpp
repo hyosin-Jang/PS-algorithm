@@ -2,12 +2,12 @@
 
 using namespace std;
 int arr[10] = {0};
-int rem[42]; // ³ª¸ÓÁö ÀúÀå
+int rem[42]; // ë‚˜ë¨¸ì§€ ì €ì¥
 int main() {
 	int tmp,cnt=0;
 	for (int i = 0; i < 10; i++) {
 		cin >> tmp;
-		arr[i] = tmp % 42; //42·Î ³ª´« ³ª¸ÓÁö
+		arr[i] = tmp % 42; //42ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€
 	}
 	// 1 2 3 4 5 6 1 1 9 1
 
@@ -19,7 +19,7 @@ int main() {
 	for (int i = 0; i < 42; i++) {
 		if (arr[i] == 1)
 			cnt++;
-	}
+	} 
 	cout << cnt;
 
 	return 0;
