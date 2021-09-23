@@ -1,58 +1,43 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
-
 const int MAX = 1000 + 1;
+int M, N;
+vector<int> graph[MAX];
+bool visited[MAX];
 
-int N, M;
-int newNext = 0;
-int visited[MAX] = {0,};
-int connectedComponent=0;
-vector <int> graph[MAX];
+void DFS(int node){
+        visited[node] = true;
+        for (int i = 0; i < graph[node].size(); i++){
+                 int next = graph[node][i];
 
-void findConnectedComponent(int nodeNum) {
-	visited[nodeNum] = 1; 
+                 if (!visited[next])
+                         DFS(next);
 
-	//DFS
-	for (int i = 0; i < graph[nodeNum].size(); i++) {
-		int next = graph[nodeNum][i];
-		int count = 0;
-		if (visited[next]) {
-			count++;
-			if (count == graph[nodeNum].size()) {
-				connectedComponent++;
-				for (int j = 1; j <= N; j++) 
-					if (visited[j] != 1) {
-						newNext = j;
-						break;
-					} 
-				findConnectedComponent(newNext);
-			}
-		}
-		else
-			findConnectedComponent(next);
-	}
+        }
 }
 
-int main() {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0); 
+int main(void){
+        cin >> N >> M;
+        for (int i = 0; i < M; i++){
+                 int node1, node2;
 
-	cin >> N >> M;
+                 cin >> node1 >> node2;
 
-	for (int i = 1; i <= M; i++) {
-		int u, v;
-		cin >> u >> v;
+                 graph[node1].push_back(node2);
+                 graph[node2].push_back(node1);
 
-		graph[u].push_back(v);
-		graph[v].push_back(u);
-		
-	}
-	findConnectedComponent(1);
+        }
+        int cnt = 0;
 
-	cout << connectedComponent;
+        for (int i = 1; i <= N; i++)
+                 if (!visited[i]){
+                         DFS(i);
+                         cnt++;
+                 }
+        cout << cnt << endl;
 
-	return 0;
-
+        return 0;
 
 }
