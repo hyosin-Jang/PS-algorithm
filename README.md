@@ -1,11 +1,13 @@
 # baekjoon-c
 baekjoon algorithm using C
 
-커밋 
+# 구현
+명령 프롬포트
+물병
+[킹](https://codingwiths.tistory.com/170)
 
-|날짜|알고리즘|문제명|링크|
-|------|---|-----|-------|
-|`211030`|`bruteforce`|`숫자 정사각형`||
-|`211030`|`구현`|`명령 프롬포트`||
-|`211030`|`구현`|`물병`||
+# bruteforce
+숫자 정사각형
 
+# 자료구조
+[요세퍼스문제](https://codingwiths.tistory.com/161)
