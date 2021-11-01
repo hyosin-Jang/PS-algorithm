@@ -4,7 +4,7 @@ baekjoon algorithm using C
 # 구현
 명령 프롬포트
 물병
-[킹](https://codingwiths.tistory.com/170)
+[킹](https://codingwiths.tistory.com/170) 저항
 
 # bruteforce
 숫자 정사각형
