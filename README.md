@@ -10,4 +10,4 @@ baekjoon algorithm using C
 숫자 정사각형
 
 # 자료구조
-[요세퍼스문제](https://codingwiths.tistory.com/161)
+[요세퍼스문제](https://codingwiths.tistory.com/161) 큐2
