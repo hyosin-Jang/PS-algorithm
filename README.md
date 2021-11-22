@@ -14,3 +14,7 @@ baekjoon algorithm using C
 
 # 자료구조
 [요세퍼스문제](https://codingwiths.tistory.com/161) 큐2
+
+# 덱
+[풍선 터뜨리기](https://codingwiths.tistory.com/183)
+
