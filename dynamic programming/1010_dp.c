@@ -1,30 +1,34 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#define SIZE 30
+#include<iostream>
+#include<vector>
+using namespace std;
 
-double fac(double n) {
-	double e = 1;
-	for (int i = 1; i <= n; i++)
-		e *= i;
-	return e;
+int solution(int n,int m) {
+	vector<vector<int>> v(n+1,vector<int>(m+1,0));
+	for(int i=1;i<=m;i++)	
+		v[1][i] = i;
+	
+	for(int i=2;i<=n;i++) {
+		for(int j=i;j<=m;j++) {
+			if(j == i) {
+				v[i][j] = 1;
+				continue;
+				}
+			 for(int k=i-1; k<=j-1;k++) 
+				v[i][j] += v[i-1][k];
+		}
+	}
+
+	return v[n][m];
 }
 
 int main() {
-
-	int n[SIZE], m[SIZE], t=0, d[SIZE];
-	int num;
-
-	scanf("%d",&t);
-
-	for (int i = 0; i < t; i++)
-		scanf("%d %d",&n[i],&m[i]);
-
-	for (int i = 0; i < t; i++) {
-		int a = 1;
-		a = fac(m[i]) / (fac(n[i]) * fac(m[i] - n[i]));
-		printf("%d\n",a);
+	ios_base::sync_with_stdio(0);
+	cin.tie(NULL); cout.tie(NULL);
+	int n,m,T;
+	cin >> T;
+	while(T--) {
+	cin >> n >> m;
+	cout <<solution(n,m)<<"\n";
 	}
-
-
 	return 0;
 }
