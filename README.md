@@ -20,3 +20,6 @@ baekjoon algorithm using C
 
 # map, set
 [카드 놓기](https://codingwiths.tistory.com/185)
+
+# Math
+소수판정법 정리하기
