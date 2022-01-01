@@ -8,6 +8,9 @@ int R, C;
 char field[MAX][MAX];
 int visited[MAX][MAX];
 
+int dx[] = { 1, -1, 0, 0 };
+int dy[] = { 0, 0, 1, -1 };
+
 void BFS(int a, int b) {
 
 	int cur_sheep, cur_wolf;
@@ -21,6 +24,8 @@ void BFS(int a, int b) {
 	if (field[a][b] == 'v') cur_wolf++;
 
 	// BFS 로직 짜기
+
+
 
 }
 
@@ -43,6 +48,8 @@ int main() {
 	}
 
 	// 전체 양의 개수랑 전체 늑대 개수 출력하기
+
+
 
 
 	return 0;
