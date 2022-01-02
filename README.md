@@ -1,5 +1,5 @@
 # baekjoon-c
-baekjoon algorithm using C
+같은 문제 여러 번 풀때는 커밋 메시지에 날짜 적기
 
 # 자료구조
 - map
