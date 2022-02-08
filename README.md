@@ -6,7 +6,7 @@
 1/12-1/20  |`Graph` | DFS와 BFS, 미로탐색, 토마토, [숨바꼭질](https://codingwiths.tistory.com/207), [연구소](https://codingwiths.tistory.com/208), [적록 색약](https://codingwiths.tistory.com/209)  | 그래프 개념 정리 |
 1/21-1/27  |`Dynamic Programming` | 연속 합, 가장 긴 증가하는 부분 수열, 정수 삼각형, LCS, LCS2, 이친수  | DP 개념 정리 | 
 1/28-2/4  |`implementation` | 치킨 배달, 테트로미노, 로봇 청소기, 그룹단어체커, 방 번호, 2007년, 날짜 계산   | 트리, BST, 해싱, 트라이,</br> B-tree 개념 정리, </br>테트로미노 시간복잡도 계산 |  
-2/5-2/9  |`Recursion` |    |  |  
+2/5-2/9  |`Recursion` | 쿼드트리, 별찍기    |  |  
 
 
 - 5052 다시 풀어보기
