@@ -26,9 +26,9 @@ pair<ll, ll> findY(ll x) {
 
 }
 
-int gcd(int a, int b) {
+ll gcd(ll a, ll b) {
 
-	int c;
+	ll c;
 	while (b != 0) {
 		c = a % b;
 		a = b;
@@ -66,7 +66,14 @@ int main() {
 	ll ans_x = a_denom * b_denom * (e - s);
 	ll ans_y = abs(a_num * b_denom - b_num * a_denom);
 
+
+	//cout << "ans_x: " << ans_x<<  " ans_y: " << ans_y << "\n";
+
 	ll gn = gcd(ans_x, ans_y);
+
+
+
+	//cout << "gn: " << gn << "\n";
 	ans_x = ans_x / gn; ans_y = ans_y / gn;
 
 	if (ans_y == 0)
