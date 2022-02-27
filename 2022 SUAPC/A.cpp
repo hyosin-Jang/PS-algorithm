@@ -13,7 +13,7 @@ int getParent(int x) {
     if (parent[x] == x) return x;
     return parent[x] = getParent(parent[x]);
 
-}
+} 
 
 // 두 부모 노드 합치는 함수
 void unionParent(int a, int b) {
