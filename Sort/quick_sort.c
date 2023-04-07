@@ -17,7 +17,7 @@ int partition(int list[], int left, int right) {
 	do {
 		do
 			low++;
-		while (list[low] < pivot); // pivotº¸´Ù ÀÛÀ¸¸é ¿òÁ÷ÀÓ
+		while (list[low] < pivot); // pivotï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		do
 			high--;
@@ -31,16 +31,16 @@ int partition(int list[], int left, int right) {
 		if (low < high)
 			SWAP(list[low], list[high], temp);
 	} while (low < high);
-	// ÇÑ¹øÀÇ ÆÄÆ¼¼ÇÀÌ ³¡³². ÀÌ¶§, pivot°ú high°¡ °¡¸®Å°´Â °ªÀ» swap
-	SWAP(list[left], list[high], temp); // pivot°ú °¡Àå ÀÛÀº high¸¦ ¸®ÅÏ
+	// ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ì¶ï¿½, pivotï¿½ï¿½ highï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ swap
+	SWAP(list[left], list[high], temp); // pivotï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ highï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	return high;
 }
 
 
 void quick_sort(int list[], int left, int right) {
 	if (left < right) {
-		int q = partition(list, left, right); //ºÐÇÒÇÏ´Â ÇÔ¼ö
-		quick_sort(list, left, q - 1); // ¿ÞÂÊ ¼­ºê
+		int q = partition(list, left, right); //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+		quick_sort(list, left, q - 1); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		quick_sort(list, q + 1, right);
 	}
 }
@@ -56,7 +56,7 @@ void main() {
 	printf("\n\n");
 	getch(); 
 	
-	quick_sort(list, 0, MAX_SIZE - 1); //¹è¿­, ¿ÞÂÊ ÀÎµ¦½º, ¿À¸¥ÂÊ ÀÎµ¦½º
+	quick_sort(list, 0, MAX_SIZE - 1); //ï¿½è¿­, ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
 
 	for (int i = 0; i < MAX_SIZE; i++)
 		printf("[%d] ", list[i]);
